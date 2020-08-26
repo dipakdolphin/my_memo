@@ -11,6 +11,32 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import colors from '../colors';
 
 export default class AddListModal extends Component {
+  backgroundColors = [
+    '#5CD859',
+    '#24A6D9',
+    '#595BD9',
+    '#8022D9',
+    '#D159D8',
+    '#D85963',
+    '#D88559',
+  ];
+  
+  state = {
+    name: '',
+    color: this.backgroundColors[0],
+  };
+
+  myColors() {
+    return this.backgroundColors.map(color => {
+      return (
+        <TouchableOpacity
+          key={color}
+          style={[styles.colorSelect, {backgroundColor: color}]}
+          onPress={()=>this.setState({color})}
+        />
+      );
+    });
+  }
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -19,9 +45,21 @@ export default class AddListModal extends Component {
           onPress={this.props.closeModal}>
           <Icon name="close" size={24} color={colors.black} />
         </TouchableOpacity>
-        <View style={{alignSelf:'stretch', marginHorizontal:32}}>
-        <Text style={styles.title}>Create Todo List</Text>
-        <TextInput style={styles.input} placeholder="List Name?" />
+
+        <View style={{alignSelf: 'stretch', marginHorizontal: 32}}>
+          <Text style={styles.title}>Create Todo List</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="List Name?"
+            onChangeText={(text) => this.setState({name: text})}
+          />
+          <View style={{flexDirection:"row",justifyContent:"space-around",marginTop:12 ,}}>{this.myColors()}</View>
+          <TouchableOpacity
+            style={[styles.create, {backgroundColor: this.state.color}]}>
+            <Text style={{color: colors.white, fontWeight: '600'}}>
+              Create!
+            </Text>
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     );
@@ -48,5 +86,17 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingHorizontal: 16,
     fontSize: 18,
+  },
+  create: {
+    marginTop: 24,
+    height: 50,
+    borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  colorSelect: {
+    width: 30,
+    height: 30,
+    borderRadius: 6,
   },
 });

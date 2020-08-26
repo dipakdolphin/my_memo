@@ -10,7 +10,7 @@ import AddListModal from './components/AddListModal';
 
 export default class App extends Component {
 state={
-addTodoVisible : false
+addTodoVisible : true
 }
 toggleAddTodoModal(){
   this.setState({addTodoVisible: !this.state.addTodoVisible})
