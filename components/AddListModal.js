@@ -26,6 +26,18 @@ export default class AddListModal extends Component {
     color: this.backgroundColors[0],
   };
 
+  createTodo=()=>{
+    const {name, color} = this.state
+
+    tempData.push({
+      name,
+      color,
+      todos:[]
+    })
+    this.setState({name:""})
+    this.props.closeModal();
+  }
+
   myColors() {
     return this.backgroundColors.map(color => {
       return (
@@ -55,7 +67,7 @@ export default class AddListModal extends Component {
           />
           <View style={{flexDirection:"row",justifyContent:"space-around",marginTop:12 ,}}>{this.myColors()}</View>
           <TouchableOpacity
-            style={[styles.create, {backgroundColor: this.state.color}]}>
+            style={[styles.create, {backgroundColor: this.state.color}]} onPress={this.createTodo}>
             <Text style={{color: colors.white, fontWeight: '600'}}>
               Create!
             </Text>
