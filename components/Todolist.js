@@ -23,7 +23,7 @@ export default class Todolist extends Component {
       
       <Modal animationType= "slide" visible= {this.state.showListVisible} onRequestClose={()=> this.toggleListModal()}>
         <View>
-          <TodoModal list={list} closeModal={()=> this.toggleListModal()} />
+          <TodoModal list={list} closeModal={()=> this.toggleListModal()} updateList = {this.props.updateList} />
         </View>
       </Modal>
         <TouchableOpacity
